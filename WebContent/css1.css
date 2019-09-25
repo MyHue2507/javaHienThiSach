@@ -1,0 +1,23 @@
+
+.oVuong{
+	width: 100px ;
+	height: 100px;
+	margin: 20px;
+	display:inline-block ;
+
+
+}
+.mau1{
+	background: red ;
+}
+.mau2{
+	background: yellow ;
+	border: 5px solid black;
+}
+.mau3{
+	background: green;
+}
+.display{
+	display:inline-block ;
+}
+	
