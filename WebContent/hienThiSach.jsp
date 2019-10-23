@@ -1,3 +1,4 @@
+<%@page import="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="bo.sachBo"%>
 <%@page import="bean.sachBean"%>
@@ -11,31 +12,36 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table border="1" cellspacing="0" cellpadding="5">
+	<table cellspacing="50" cellpadding="5">
 		<tr>
 			<td width="200">
 				<%
 					sachBo sach = new sachBo() ;
-					for(sachBean s : sach.getSach()){%>
-						<a href="hienThiSach.jsp?maSach=<%=s.getmSach()%>&tenSach=<%=s.getTenSach()%>&gia=<%=s.getGia()%>&tacGia=<%=s.getTacGia()%>&anh=<%=s.getAnh()%>"><%=s.getmSach() %></a><hr>
-					<%}
+				ArrayList<sachBean> ds = sach.getSach();
+				int ss = ds.size();
+				for(int i = 0 ; i< ss ; i++){
+					sachBean s =  ds.get(i);
 				%>
-			</td>
-			<td>
+				<tr>
+					<td><img  src="<%= s.getAnh()%>" height="200"><br>
+					<%=s.getTenSach() %><br>
+					<%=s.getGia() %><br>
+					<a href="mua.jsp?ms=<%=s.getmSach()%>&ts=<%=s.getTenSach()%>&tg=<%=s.getTacGia() %>&gia=<%=s.getGia()%>"><img  src="buynow.jpg"></a><hr>
+					
+					</td>
 				<%
-					String ms = request.getParameter("maSach");
-					if(ms == null)
-						out.print("Chọn");
-					else{
-						%>
-							Mã Sách : <%=request.getParameter("maSach") %><br>
-							Tên Sách : <%=request.getParameter("tenSach") %><br>
-							Tên tác giả : <%=request.getParameter("tacGia") %><br>
-							Giá : <%=request.getParameter("gia") %><br>
-							Ảnh : <img src="<%=request.getParameter("anh")%>">
-						<%
-					}
-				%>
+				i++;
+				if(i<ss){
+					s = ds.get(i) ;%>
+					<td><img  src="<%= s.getAnh()%>" height="200"><br>
+					<%=s.getTenSach() %><br>
+					<%=s.getGia() %><br>
+					<a href="mua.jsp?ms=<%=s.getmSach()%>&ts=<%=s.getTenSach()%>&tg=<%=s.getTacGia() %>&gia=<%=s.getGia()%>"><img  src="buynow.jpg"></a><hr>
+					</td>
+				<% 
+				}%>
+				</tr>
+				<%} %>
 			</td>
 		</tr>
 	</table>
